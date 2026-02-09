@@ -1,0 +1,321 @@
+/* --- Basic Setup --- */
+:root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --accent: #38bdf8;
+    --text: #f8fafc;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* --- Navigation --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 10%;
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav ul { display: flex; list-style: none; gap: 2rem; }
+nav ul li a { color: var(--text); text-decoration: none; font-weight: bold; }
+nav ul li a:hover { color: var(--accent); }
+
+/* --- Hero Section --- */
+.hero {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.hero h1 { font-size: 4rem; color: var(--accent); margin-bottom: 10px; }
+
+/* --- MODAL LOGIC (Fixed for Multiple Modals) --- */
+.modal-overlay {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(12px);
+    transition: 0.4s ease-in-out;
+    overflow-y: auto; /* Allows scrolling when modal is open */
+}
+
+/* Trigger when #aboutModal or #projectsModal is targeted */
+.modal-overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content {
+    background: var(--card);
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid var(--accent);
+    max-width: 850px;
+    width: 90%;
+    margin: 50px auto;
+    position: relative;
+}
+
+#projectsModal .modal-content {
+    max-width: 1000px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* --- Content Sections inside Modals --- */
+.prof-section, .spiritual-section, .project-detail {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    align-items: center;
+}
+
+.project-detail.reversed { flex-direction: row-reverse; }
+
+.prof-text, .spiritual-text, .project-text { flex: 1.5; font-family: cursive; font-size: 20px; }
+ .project-text { flex: 1.5; font-family: cursive; font-size: 20px;text-align: left;text-align:auto; }
+.prof-image, .spiritual-image, .project-visual {
+    flex: 1;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.prof-image { background-image: url('https://www.spjain.org/hubfs/2025/Feature-image-sp-jain-global-bds-blog-pursue-a-career-in-data-science.jpg'); }
+.spiritual-image { background-image: url('https://static.vecteezy.com/system/resources/previews/057/978/073/non_2x/modern-serene-nature-scene-icon-with-a-person-meditating-and-isolated-background-vector.jpg'); }
+
+.btn-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 1px solid var(--accent);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .prof-section, .spiritual-section, .project-detail { flex-direction: column; }
+    .prof-image, .spiritual-image, .project-visual { width: 100%; height: 200px; }
+}
+
+.project-visual {
+    flex: 1;
+    background: #0f172a;
+    border-radius: 12px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    overflow: hidden; /* This clips anything that tries to go outside the box */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.project-visual img {
+    width: 100%;       /* Makes the image match the width of the box */
+    height: 100%;      /* Makes the image match the height of the box */
+    object-fit: cover; /* This is the magic line: it crops the image to fit perfectly without stretching */
+    display: block;
+}
+
+.cta-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 30px;
+    background-color: var(--accent); /* Uses your #38bdf8 blue */
+    color: var(--bg); /* Dark navy text for contrast */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+}
+
+.cta-btn:hover {
+    transform: translateY(-3px); /* Lifts the button slightly */
+    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.5);
+    background-color: #f8fafc; /* Shifts to white on hover */
+    color: var(--accent);
+}
+
+/* Research Modal Specifics */
+.research-modal-wide {
+    max-width: 1100px;
+    width: 95%;
+}
+
+.research-container {
+    display: flex;
+    flex-direction: column; /* Stacks info above the PDF for better reading */
+    gap: 2rem;
+}
+
+.research-info h3 {
+    color: var(--accent);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.tech-stack span {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--accent);
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    border: 1px solid var(--accent);
+}
+
+.pdf-viewer {
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff; /* Provides contrast for the PDF */
+}
+
+.viewer-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 10px;
+}
+
+.academic-section {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+    align-items: center;
+    padding: 20px;
+    background: rgba(56, 189, 248, 0.05);
+    border-radius: 15px;
+    border: 1px dashed var(--accent);
+}
+
+.academic-text {
+    flex: 1;
+}
+
+.gpa-badge {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 20px;
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: bold;
+    border-radius: 50px;
+    font-size: 1.2rem;
+}
+
+.academic-image {
+    flex: 1;
+}
+
+.academic-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+}
+
+.academic-image img:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive fix */
+@media (max-width: 768px) {
+    .academic-section {
+        flex-direction: column;
+    }
+}
+
+/* --- Contact Footer Styling --- */
+.contact-footer {
+    padding: 60px 10%;
+    background: #0f172a; /* Matches your background variable */
+    text-align: center;
+    border-top: 1px solid rgba(56, 189, 248, 0.2);
+    margin-top: 50px;
+}
+
+.contact-footer h2 {
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.contact-footer p {
+    color: #94a3b8;
+    margin-bottom: 30px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.social-icon {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+}
+
+.copyright {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+.skill-tag {
+    display: inline-block;
+    padding: 8px 15px;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    text-align: center;
+}
+.skill-tag:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
